@@ -3,8 +3,6 @@ import ColorPicker from './ColorPicker';
 
 function MusicSection({questions, peopleCounter}) {
 
-  var isSurveyFinished = false;
-
   const [selectedOption, setSelectedOption] = useState(''); // Ustaw pustą wartość
   
   const handleSelectChange = (event) => {

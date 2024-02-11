@@ -1,5 +1,4 @@
 import React from 'react';
-import colorsImage from '../images/0_connection_between_emotions_and_colors.png' 
 
 function StudentsIntro({intro}) {
   return (

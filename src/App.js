@@ -1,26 +1,22 @@
 import './App.css';
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 
 import Header from './components/Header';
 import StudentsIntro from './components/StudentsIntro';
-import StudentsEnd from './components/StudentsEnd';
 import SpeechSection from './components/SpeechSection';
 import MusicSection from './components/MusicSection';
-import EmotionsSection from './components/MusicSection';
 import BasicInformation1 from './components/BasicInformation1';
 import Agreement from './components/Agreement';
 import { questions } from './questions/Questions';
 import { questions_english } from './questions/Questions_EN';
 import { text } from './text/Text';
 import { text_english } from './text/Text_EN';
-import colorsImage from './images/0_connection_between_emotions_and_colors.png'
-import txtPeopleCounter from './txtPeopleCounter.json'; 
 
 var updatedQuestions = questions;
 var updatedText = text;
 
 function App({peopleCounter }) {
-
+// eslint-disable-next-line no-unused-vars
   var [ENGLISH, setENGLISH] = useState(updatedQuestions, updatedText);
 
     const PolandClick = () => {

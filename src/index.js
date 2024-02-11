@@ -1,24 +1,13 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './App.css';
 import App from './App';
-import Header from './components/Header';
-import StudentsIntro from './components/StudentsIntro';
-import ColorButton from './components/ColorButton';
-import ColorPicker from './components/ColorPicker';
-import AudioSection from './components/SpeechSection';
 import reportWebVitals from './reportWebVitals';
-import backImage from './images/0_connection_between_emotions_and_colors.png';
 import $ from 'jquery';
-import txtPeopleCounter from './txtPeopleCounter.json';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-
 let peopleCounter = 1;
-let peopleCountersss = fetch(txtPeopleCounter).then(r => r.text());
-
-
 
 
 //TA FUNKCJA JEST OD WSZYSTKIEGO (TAK JAKBY OD STRONY I OD BUTTONÓW)
@@ -27,9 +16,7 @@ $( document ).ready(function() {
   var active_color = "rgb(237, 40, 70)"; // zielony od buttonów: 0, 170, 105     KOLOR WYPEŁNIONYCH NA CZERWONO KÓŁECZEK NA GÓRZE
   var submitted_color = "#6bb834";
   
-  var isSurveyFinished = false;
   var isColorSelected = true;
-  var isEmotionSelected = true;
   var counter = 0;
   var rows = 0;
   var questionsAmount = 16; // 10 pytań o audio + 6 o emocje
@@ -93,7 +80,6 @@ var colorsMatrix = [
     var selectedSwatchName = selectedSwatch.data('tooltip');
     var selectedSwatchNumber = selectedSwatch.attr('class').match(/\d+/)[0];
     var selectedSwatchParent = selectedSwatch.closest('ul');
-    var selectedSwatchParentOffset = selectedSwatchParent.css('top');
     var selectedColor = selectedSwatch.css('background-color');
     var selectedOffset = selectedSwatch.offset();
     var cardOffset = $('.card').offset();
@@ -193,7 +179,6 @@ var colorsMatrix = [
   $('.choose_emotion').on('change', function() {
     const selectedEmotion = $(this).val(); // Get the selected option value
     emotionsMatrix[rows] = selectedEmotion;
-    isEmotionSelected = true;
     //console.log('emotionsMatrix: ' + emotionsMatrix);
   });
 
@@ -236,13 +221,13 @@ var colorsMatrix = [
     document.getElementById("svg_form_time").appendChild(circle);
   }
   
-  var circle = makeSVG("circle", {
+/*   var circle = makeSVG("circle", {
     cx: positionX + 200,
     cy: 12,
     r: 30,
     width: positionX,
     height: 6
-  });
+  }); */
   document.getElementById("svg_form_time").appendChild(circle);
   $('#svg_form_time rect').css('fill',base_color);
   $('#svg_form_time circle').css('fill',base_color);
@@ -334,12 +319,10 @@ var colorsMatrix = [
     //TRIGGER NIE POZWALAJĄCY NA DALSZE PÓJŚCIE PÓKI NIE WYBIERZE SIĘ CO NAJMNIEJ JEDEN KOLOR ORAZ EMOCJĘ
     if(child === 1 || (child === 2 && selectedSex.length !== 0 && selectedAge.length !== 0 && selectedDisease.length !== 0)|| (emotionsMatrix[rows] !== 0 && (colorsMatrix[rows][0] !== 'rgba(241, 241, 241, 0.493)'|| colorsMatrix[rows][1] !== 'rgba(241, 241, 241, 0.493)' || colorsMatrix[rows][2] !== 'rgba(241, 241, 241, 0.493)'))){
       isColorSelected = true;
-      isEmotionSelected = true;
       $('.warning_info').hide();
     }
     else {
       isColorSelected = false;
-      isEmotionSelected = false;
       $('.warning_info').show();
     }
 
@@ -359,7 +342,6 @@ var colorsMatrix = [
         }
         if (child > 1 && child < questionsAmount + 2){
           isColorSelected = false;
-          isEmotionSelected = false;
           $('.warning_info').hide();
         }
         child++;
@@ -393,11 +375,9 @@ var colorsMatrix = [
       $('#svg_form_time rect').css('fill',submitted_color);
       $('#svg_form_time circle').css('fill',submitted_color);
       $("circle:nth-of-type(1)").css("fill", submitted_color);
-      isSurveyFinished = true;
     }
     if(id === "again")
     {
-      isSurveyFinished = false;
       peopleCounter = peopleCounter+1;
       console.log(peopleCounter);
       window.location.reload();

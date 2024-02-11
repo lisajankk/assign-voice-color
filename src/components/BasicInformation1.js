@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import ColorPicker from './ColorPicker';
+import React from 'react';
 
 function BasicInformation1({basic1, basic2, basic3}) {
 
